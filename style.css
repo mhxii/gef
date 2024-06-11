@@ -1,0 +1,205 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  background-image: url(images/fond.png);
+  /* height: 100%; */
+  /* width: 100%; */
+}
+
+header {
+  
+justify-content: space-between;
+  
+align-items: center;
+  
+padding: 3%;
+  
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+background-color: white;
+}
+
+.logo {
+  /*  */
+  text-align: center;
+  /* position: relative; */
+  /* width: 13px; */
+}
+
+.logo img {
+  width: 22%;
+  height: 13%;
+  position: fixed;
+  top: 0%;
+  left: 39%;
+}
+
+.contact {
+  text-align: right;
+}
+
+.contact a {
+  color: green;
+  text-decoration: none;
+}
+
+main {
+  
+align-items: center;
+  
+/* min-height: 63vh; */
+  
+position: absolute;
+  
+top: 23%;
+}
+
+form {
+  background-color: #fff;
+  padding: 41px;
+  height: 386px;
+  width: 300px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 9%;
+  margin-left: 6%;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: green;
+}
+
+label {
+  
+  margin-bottom: 5px;
+  color: green;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border: 0px solid #ccc;
+  border-radius: 16px;
+  box-sizing: border-box;
+  background-color: #f6f6f6;
+  margin-bottom: 18px;
+}
+
+input:focus{
+  border: 1px solid green;
+  outline: none;
+}
+
+input:hover{
+  border: 1px solid green;
+}
+
+
+input[type="submit"]{
+  background-color: green;
+  color: white;
+  border: 1px solid green;
+}
+
+
+
+input[type="submit"]:hover{
+  background-color: white;
+  color: green;
+  /* animation-duration: 2s; */
+  transition-duration: 1s;
+  cursor: pointer;
+  border: 1px solid green;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.lost-password {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.lost-password a {
+  color: GREEN;
+  text-decoration: none;
+  text-align: center;
+}
+
+
+
+footer {
+  /* text-align: center; */
+  /* padding: 20px; */
+  /* background-color: #f4f4f4; */
+  position: fixed;
+}
+
+/* Styles existants */
+
+#playerList {
+  display: block;
+}
+
+
+.message-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.avatar i {
+  color: #fff;
+}
+
+.message-content {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.message-content h5 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.message-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.status i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.reply-btn {
+  margin-left: auto;
+}
