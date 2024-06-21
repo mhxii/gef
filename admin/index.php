@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -36,9 +35,11 @@
       </form>
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <p>ADMIN</p>
           <i class="fas fa-user"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          
           <a class="dropdown-item" href="#">Profil</a>
           <a class="dropdown-item" href="#">Paramètres</a>
           <div class="dropdown-divider"></div>
@@ -62,7 +63,7 @@
                 <p class="mt-2 mb-0">8</p>
                 <small>Messages</small>
               </div>
-              <div class="col player-list-trigger">
+              <div class="col playerDispo">
                 <i class="fas fa-user fa-2x"></i>
                 <p class="mt-2 mb-0">29</p>
                 <small>Joueurs disponibles</small>
@@ -87,31 +88,111 @@
                 <p class="mt-2 mb-0">29</p>
                 <small>Trophées</small>
               </div>
+              <div class="col planning">
+                <i class="fas fa-calendar fa-2x" data-toggle="modal" data-target="#trophiesModal"></i>
+                <p class="mt-2 mb-0">29</p>
+                <small>Planning</small>
+              </div>
             </div>
-            <!-- <div class="row status-row message">
-              
-              <div class="col-sm-3">
-                <i class="fas fa-user-circle fa-2x text-danger"></i>
-                <p class="mt-2 mb-0">Je ne peux pas me connecter</p>
-                <small>JOUEURS 1</small>
+            <div class="row status-row message">
+              <ul class="message-list" style="display: block;">
+                <li class="message">
+                  <div class="avatar"><i class="fas fa-user"></i></div>
+                  <div class="message-content"><h5>John Doe</h5><p>Message terminé</p></div>
+                  <div class="status"><i class="fas fa-check-circle text-success"></i></div>
+                  <button class="btn btn-primary btn-sm reply-btn">Répondre</button>
+                </li>
+                <li class="message">
+                  <div class="avatar"><i class="fas fa-user"></i></div>
+                  <div class="message-content"><h5>Jane Smith</h5><p>Message en cours</p></div>
+                  <div class="status"><i class="fas fa-spinner fa-spin text-danger"></i></div>
+                  <button class="btn btn-primary btn-sm reply-btn">Répondre</button>
+                </li>
+                <li class="message">
+                  <div class="avatar"><i class="fas fa-user"></i></div>
+                  <div class="message-content"><h5>Bob Johnson</h5><p>Message terminé</p></div>
+                  <div class="status"><i class="fas fa-check-circle text-success"></i></div>
+                  <button class="btn btn-primary btn-sm reply-btn">Répondre</button>
+                </li>
+                <li class="message">
+                  <div class="avatar"><i class="fas fa-user"></i></div>
+                  <div class="message-content"><h5>Samantha Lee</h5><p>Message en cours</p></div>
+                  <div class="status"><i class="fas fa-spinner fa-spin text-danger"></i></div>
+                  <button class="btn btn-primary btn-sm reply-btn">Répondre</button>
+                </li>
+              </ul>
+            </div>
+            <div class="row status-row playerList">
+              <div class="col-12" id="playerList">
+                <div class="row mb-3">
+                  <div class="col-3">Lionel Messi</div>
+                  <div class="col-2">10</div>
+                  <div class="col-4">AID</div>
+                  <div class="col-3">
+                    <button class="btn btn-danger btn-sm mr-2">Supprimer</button>
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">Cristiano Ronaldo</div>
+                  <div class="col-2">7</div>
+                  <div class="col-4">AC</div>
+                  <div class="col-3">
+                    <button class="btn btn-danger btn-sm mr-2">Supprimer</button>
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">Nicolas Pepe</div>
+                  <div class="col-2">3</div>
+                  <div class="col-4">DC</div>
+                  <div class="col-3">
+                    <button class="btn btn-danger btn-sm mr-2">Supprimer</button>
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">Edouard Mendy</div>
+                  <div class="col-2">22</div>
+                  <div class="col-4">Gardien</div>
+                  <div class="col-3">
+                    <button class="btn btn-danger btn-sm mr-2">Supprimer</button>
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
               </div>
-              <div class="col-sm-3">
-                <i class="fas fa-user-circle fa-2x text-success"></i>
-                <p class="mt-2 mb-0">Je ne peux pas me connecter</p>
-                <small>JOUEURS 1</small>
+            </div>
+            <div class="row status-row entraineur">
+              <div class="col-12" id="trainerList">
+                <div class="row mb-3">
+                  <div class="col-3">Dupont</div>
+                  <div class="col-2">Jean</div>
+                  <div class="col-4">Entraîneur principal</div>
+                  <div class="col-3">
+                    <button class="btn btn-danger btn-sm mr-2">Supprimer</button>
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">Martin</div>
+                  <div class="col-2">Sophie</div>
+                  <div class="col-4">Entraîneur adjoint</div>
+                  <div class="col-3">
+                    <button class="btn btn-danger btn-sm mr-2">Supprimer</button>
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">Garcia</div>
+                  <div class="col-2">Pierre</div>
+                  <div class="col-4">Préparateur physique</div>
+                  <div class="col-3">
+                    <button class="btn btn-danger btn-sm mr-2">Supprimer</button>
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                  
               </div>
-              <div class="col-sm-3">
-                <i class="fas fa-user-circle fa-2x text-success"></i>
-                <p class="mt-2 mb-0">ENTRAINEUR</p>
-              </div>
-              <div class="col-sm-3">
-                <i class="fas fa-user-circle fa-2x text-success"></i>
-                <p class="mt-2 mb-0">Je ne peux pas me connecter</p>
-                <small>JOUEURS 1</small>
-              </div>
-            </div> -->
-            <div class="row status-row content">
-
+            </div>
             </div>
             <div class="text-right">
               <button class="btn btn-primary">Suivant <i class="fas fa-arrow-right"></i></button>
@@ -119,11 +200,9 @@
           </div>
         </div>
       </div>
-      <!-- Autres colonnes -->
     </div>
   </div>
 
-  <!-- Modal des joueurs blessés -->
   <div class="modal fade" id="playerInjuredModal" tabindex="-1" role="dialog" aria-labelledby="playerInjuredModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -134,7 +213,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- Contenu de la modale des joueurs blessés -->
+          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -143,7 +222,6 @@
     </div>
   </div>
 
-  <!-- Modal des trophées -->
   <div class="modal fade" id="trophiesModal" tabindex="-1" role="dialog" aria-labelledby="trophiesModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -154,7 +232,6 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- Contenu de la modale des trophées -->
           <div class="row">
             <div class="col-md-4">
               <div class="trophy-item">

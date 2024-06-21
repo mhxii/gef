@@ -52,6 +52,7 @@ body {
 /* Statut */
 .status-row {
   margin-bottom: 1.5rem;
+  display: block;
 }
 
 .status-row .col {

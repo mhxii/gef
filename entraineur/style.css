@@ -148,9 +148,77 @@ li.message {
   color: #666;
 }
 
+.match-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+li.match {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.match-content {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.match-content h5 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.match-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.trainer-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+li.trainer {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.trainer-content {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.trainer-content h5 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.trainer-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
 .status i {
   font-size: 20px;
   margin-right: 10px;
+}
+
+.time{
+  margin-right: 10px;
+}
+
+.score{
+  margin-right: 20%;
 }
 
 .reply-btn {

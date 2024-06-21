@@ -203,3 +203,17 @@ footer {
 .reply-btn {
   margin-left: auto;
 }
+
+.error {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none; /* Masquer par défaut */
+  z-index: 1000;
+}
+

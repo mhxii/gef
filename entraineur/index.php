@@ -62,57 +62,184 @@
                 <p class="mt-2 mb-0">8</p>
                 <small>Messages</small>
               </div>
-              <div class="col player-list-trigger">
-                <i class="fas fa-user fa-2x"></i>
+              <div class="col matchs">
+                <i class="fa-2x"><img src="../images/stadium.png" alt=""></i>
                 <p class="mt-2 mb-0">29</p>
-                <small>Joueurs disponibles</small>
+                <small>Matchs</small>
               </div>
-              <div class="col entraineur">
+              <div class="col entrainement">
                 <i class="fas fa-dumbbell fa-2x"></i>
                 <p class="mt-2 mb-0">3</p>
-                <small>Entraîneurs</small>
+                <small>Entraînement</small>
               </div>
-              <div class="col player-list-injured">
-                <i class="fas fa-user-injured fa-2x" data-toggle="modal" data-target="#playerInjuredModal"></i>
+              <div class="col playerDispo">
+                <i class="fas fa-user-alt fa-2x"></i>
                 <p class="mt-2 mb-0">4</p>
-                <small>Joueurs blessés</small>
+                <small>Joueurs Disponible</small>
               </div>
-              <div class="col">
-                <i class="fas fa-sun fa-2x"></i>
-                <p class="mt-2 mb-0">20 km/h <i class="fas fa-wind"></i></p>
-                <small>Climat</small>
+              <div class="col playerBlesse">
+                <i class="fas fa-user-injured fa-2x"></i>
+                <p class="mt-2 mb-0"></p>
+                <small>Joueurs Blesse</small>
               </div>
-              <div class="col">
-                <i class="fas fa-trophy fa-2x" data-toggle="modal" data-target="#trophiesModal"></i>
+              <div class="col planning">
+                <i class="fas fa-calendar fa-2x"></i>
                 <p class="mt-2 mb-0">29</p>
-                <small>Trophées</small>
+                <small>Planning</small>
               </div>
             </div>
-            <!-- <div class="row status-row message">
-              
-              <div class="col-sm-3">
-                <i class="fas fa-user-circle fa-2x text-danger"></i>
-                <p class="mt-2 mb-0">Je ne peux pas me connecter</p>
-                <small>JOUEURS 1</small>
-              </div>
-              <div class="col-sm-3">
-                <i class="fas fa-user-circle fa-2x text-success"></i>
-                <p class="mt-2 mb-0">Je ne peux pas me connecter</p>
-                <small>JOUEURS 1</small>
-              </div>
-              <div class="col-sm-3">
-                <i class="fas fa-user-circle fa-2x text-success"></i>
-                <p class="mt-2 mb-0">ENTRAINEUR</p>
-              </div>
-              <div class="col-sm-3">
-                <i class="fas fa-user-circle fa-2x text-success"></i>
-                <p class="mt-2 mb-0">Je ne peux pas me connecter</p>
-                <small>JOUEURS 1</small>
-              </div>
-            </div> -->
-            <div class="row status-row content">
-
+            <div class="row status-row message">
+              <ul class="message-list" style="display: block;">
+                <li class="message">
+                  <div class="avatar"><i class="fas fa-user"></i></div>
+                  <div class="message-content"><h5>John Doe</h5><p>Message terminé</p></div>
+                  <div class="status"><i class="fas fa-check-circle text-success"></i></div>
+                  <button class="btn btn-primary btn-sm reply-btn">Répondre</button>
+                </li>
+                <li class="message">
+                  <div class="avatar"><i class="fas fa-user"></i></div>
+                  <div class="message-content"><h5>Jane Smith</h5><p>Message en cours</p></div>
+                  <div class="status"><i class="fas fa-spinner fa-spin text-danger"></i></div>
+                  <button class="btn btn-primary btn-sm reply-btn">Répondre</button>
+                </li>
+                <li class="message">
+                  <div class="avatar"><i class="fas fa-user"></i></div>
+                  <div class="message-content"><h5>Bob Johnson</h5><p>Message terminé</p></div>
+                  <div class="status"><i class="fas fa-check-circle text-success"></i></div>
+                  <button class="btn btn-primary btn-sm reply-btn">Répondre</button>
+                </li>
+                <li class="message">
+                  <div class="avatar"><i class="fas fa-user"></i></div>
+                  <div class="message-content"><h5>Samantha Lee</h5><p>Message en cours</p></div>
+                  <div class="status"><i class="fas fa-spinner fa-spin text-danger"></i></div>
+                  <button class="btn btn-primary btn-sm reply-btn">Répondre</button>
+                </li>
+              </ul>
             </div>
+            <div class="row status-row matchList">
+              <ul class="match-list" style="display: block;">
+                <li class="match">
+                  <div class="avatar"><i class="fa-2x"><img src="../images/stade.png" alt="" sizes="" srcset=""></i></div>
+                  <div class="match-content"><h5>Equipe VS Adversaire</h5><p>Ligue / Journee 12</p></div>
+                  <div class="score">0-0</div>
+                  <div class="time">27/06/2024 15:30</div>
+                  <div class="status"><i class="fas fa-long-arrow-alt-right"></i></div>
+                  <button class="btn btn-primary btn-sm">Modifier</button>
+                </li>
+                <li class="match">
+                  <div class="avatar"><i class="fa-2x"><img src="../images/stade.png" alt="" srcset=""></i></div>
+                  <div class="match-content"><h5>Adversaire VS Equipe</h5><p>LDC / Journee 1</p></div>
+                  <div class="score">2-0</div>
+                  <div class="time">17/06/2024 15:30</div>
+                  <div class="status"><i class="fas fa-spinner fa-spin text-danger"></i></div>
+                  <button class="btn btn-primary btn-sm">Modifier</button>
+                </li>
+                <li class="match">
+                  <div class="avatar"><i class="fa-2x"><img src="../images/stade.png" alt="" srcset=""></i></div>
+                  <div class="match-content"><h5>Adversaire VS Equipe</h5><p>Ligue / Journee 11</p></div>
+                  <div class="score">4-0</div>
+                  <div class="time">11/06/2024 19:30</div>
+                  <div class="status"><i class="fas fa-check-circle text-success"></i></div>
+                  <button class="btn btn-primary btn-sm">Modifier</button>
+                </li>
+                <li class="match">
+                  <div class="avatar"><i class="fa-2x"><img src="../images/stade.png" alt="" srcset=""></i></div>
+                  <div class="match-content"><h5>Equipe VS Adversaire</h5><p>Coupe / 1/8 Final</p></div>                  <div class="score">0-0</div>
+                  <div class="time">02/06/2024 12:30</div>
+                  <div class="status"><i class="fas fa-check-circle text-success"></i></div>
+                  <button class="btn btn-primary btn-sm">Modifier</button>
+                </li>
+              </ul>
+            </div>
+            <div class="row status-row entrainementList">
+              <ul class="trainer-list" style="display: block;">
+                <li class="trainer">
+                  <div class="avatar text-light"><i class="fa-2x"><img src="../images/trainer.png" alt="" sizes="" srcset=""></i></div>
+                  <div class="trainer-content"><h5>Entraînement</h5><p>Passe</p></div>
+                  <div class="time">27/06/2024 15:30</div>
+                  <div class="status"><i class="fas fa-long-arrow-alt-right"></i></div>
+                  <button class="btn btn-primary btn-sm">Modifier</button>
+                  <button class="btn btn-danger btn-sm mr-2">Supprimer</button>
+                </li>
+                <li class="trainer">
+                  <div class="avatar text-light"><i class="fa-2x"><img src="../images/trainer.png" alt="" srcset=""></i></div>
+                  <div class="trainer-content"><h5>Entraînement</h5><p>Physique</p></div>
+                  <div class="time">17/06/2024 15:30</div>
+                  <div class="status"><i class="fas fa-spinner fa-spin text-danger"></i></div>
+                  <button class="btn btn-primary btn-sm">Modifier</button>
+                  <button class="btn btn-danger btn-sm mr-2">Supprimer</button>
+                </li>
+                <li class="trainer">
+                  <div class="avatar text-light"><i class="fa-2x"><img src="../images/trainer.png" alt="" srcset=""></i></div>
+                  <div class="trainer-content"><h5>Entraînement</h5><p>Tir</p></div>
+                  <div class="time">11/06/2024 19:30</div>
+                  <div class="status"><i class="fas fa-check-circle text-success"></i></div>
+                  <button class="btn btn-primary btn-sm">Modifier</button>
+                  <button class="btn btn-danger btn-sm mr-2">Supprimer</button>
+                </li>
+              </ul>
+              <div class="text-left">
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ajouterEntrainement">Ajouter un entrainement</button>
+              </div>
+            </div>
+            <div class="row status-row playerList">
+              <div class="col-12" id="playerList">
+                <div class="row mb-3">
+                  <div class="col-3">Lionel Messi</div>
+                  <div class="col-2">10</div>
+                  <div class="col-4">AID</div>
+                  <div class="col-3">
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">Cristiano Ronaldo</div>
+                  <div class="col-2">7</div>
+                  <div class="col-4">AC</div>
+                  <div class="col-3">
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">Nicolas Pepe</div>
+                  <div class="col-2">3</div>
+                  <div class="col-4">DC</div>
+                  <div class="col-3">
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">Edouard Mendy</div>
+                  <div class="col-2">22</div>
+                  <div class="col-4">Gardien</div>
+                  <div class="col-3">
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row status-row playerBlesse">
+              <div class="col-12">
+                <div class="row mb-3">
+                  <div class="col-3">ISCO ALARCON</div>
+                  <div class="col-2">22</div>
+                  <div class="col-4">AIG</div>
+                  <div class="col-3">
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">James Madisson</div>
+                  <div class="col-2">10</div>
+                  <div class="col-4">MO</div>
+                  <div class="col-3">
+                    <button class="btn btn-primary btn-sm">Modifier</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row status-row"></div>
+            <div class="row status-row"></div>
             <div class="text-right">
               <button class="btn btn-primary">Suivant <i class="fas fa-arrow-right"></i></button>
             </div>
@@ -124,17 +251,17 @@
   </div>
 
   <!-- Modal des joueurs blessés -->
-  <div class="modal fade" id="playerInjuredModal" tabindex="-1" role="dialog" aria-labelledby="playerInjuredModalLabel" aria-hidden="true">
+  <div class="modal fade" id="ajouterEntrainement" tabindex="-1" role="dialog" aria-labelledby="ajouterEntrainement" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="playerInjuredModalLabel">Joueurs blessés</h5>
+          <h5 class="modal-title" id="ajouterEntrainement">Ajouter un entrainement</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <!-- Contenu de la modale des joueurs blessés -->
+          <form action="" method="post"></form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -143,38 +270,17 @@
     </div>
   </div>
 
-  <!-- Modal des trophées -->
-  <div class="modal fade" id="trophiesModal" tabindex="-1" role="dialog" aria-labelledby="trophiesModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modifierEntraiment" tabindex="-1" role="dialog" aria-labelledby="modifierEntraiment" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="trophiesModalLabel">Trophées</h5>
+          <h5 class="modal-title" id="modifierEntraiment">Trophées</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <!-- Contenu de la modale des trophées -->
-          <div class="row">
-            <div class="col-md-4">
-              <div class="trophy-item">
-                <img src="trophy1.jpg" alt="Trophée 1" class="img-fluid">
-                <h6>Championnat National 2022</h6>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="trophy-item">
-                <img src="trophy2.jpg" alt="Trophée 2" class="img-fluid">
-                <h6>Coupe de la Ligue 2021</h6>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="trophy-item">
-                <img src="trophy3.jpg" alt="Trophée 3" class="img-fluid">
-                <h6>Supercoupe 2020</h6>
-              </div>
-            </div>
-          </div>
+          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
