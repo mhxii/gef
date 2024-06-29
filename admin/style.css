@@ -52,7 +52,6 @@ body {
 /* Statut */
 .status-row {
   margin-bottom: 1.5rem;
-  display: block;
 }
 
 .status-row .col {
@@ -156,4 +155,73 @@ li.message {
 
 .reply-btn {
   margin-left: auto;
+}
+
+.error {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none; /* Masquer par défaut */
+  z-index: 1000;
+}
+
+.sucess {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none; /* Masquer par défaut */
+  z-index: 1000;
+}
+
+.match-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+li.match {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+
+.match-content {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.match-content h5 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.match-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.form-group input{
+  margin-top: 2px;
+}
+
+.time{
+  margin-right: 10px;
+}
+
+.score{
+  margin-right: 20%;
 }

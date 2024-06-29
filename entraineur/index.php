@@ -1,3 +1,17 @@
+<?php 
+session_start();
+if(empty($_SESSION['email'])){
+  header("Location: http://localhost/gef/");
+}
+
+@$logout=$_POST["logout"];
+    if(isset($logout)){
+        session_destroy();
+        header("Location: http://localhost/gef/");
+    
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,7 +23,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
       <img src="logo.png" alt="Logo de l'équipe" height="30">
     </a>
@@ -36,13 +50,18 @@
       </form>
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <p><?=$_SESSION['prenom'].' '.$_SESSION['nom']?></p>
           <i class="fas fa-user"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          
+          <a class="dropdown-item" href="#"><?=$_SESSION['role']?></a>
           <a class="dropdown-item" href="#">Profil</a>
-          <a class="dropdown-item" href="#">Paramètres</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Déconnexion</a>
+          <form action="" method="post">
+            <input class="dropdown-item logout" type="submit" name="logout" value="Déconnexion">
+
+          </form>
         </div>
       </div>
     </div>

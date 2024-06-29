@@ -1,8 +1,12 @@
 <?php
 
 session_start();
-if(!empty($_SESSION['email'])){
+if(@$_SESSION['role']=='admin'){
     header("Location: http://localhost/gef/admin");
+}else if(@$_SESSION['role']=='entraineur'){
+    header("Location: http://localhost/gef/entraineur");
+}else if(@$_SESSION['role']=='joueur'){
+    header("Location: http://localhost/gef/joueur");
 }
 @$email=$_POST['email'];
 @$password=$_POST['password'];
@@ -14,15 +18,37 @@ if(isset($submit)){
         $error_content="L'email ou le mot de passe est vide";
     }else {
         require_once('config.php');
-        $req="SELECT * FROM administrateur WHERE email='$email' AND password='$password' ";
-        $exec=mysqli_query($bd,$req);
-        $array=mysqli_fetch_array($exec,MYSQLI_ASSOC);
-        if (is_array($array)) {
+        $reqA="SELECT * FROM admin WHERE email='$email' AND password='$password' ";
+        $execA=mysqli_query($bd,$reqA);
+        $reqE="SELECT * FROM entrain WHERE email='$email' AND password='$password' ";
+        $execE=mysqli_query($bd,$reqE);
+        $reqJ="SELECT * FROM joueur WHERE email='$email' AND password='$password' ";
+        $execJ=mysqli_query($bd,$reqJ);
+        $arrayA=mysqli_fetch_array($execA,MYSQLI_ASSOC);
+        $arrayE=mysqli_fetch_array($execE,MYSQLI_ASSOC);
+        $arrayJ=mysqli_fetch_array($execJ,MYSQLI_ASSOC);
+        if (is_array($arrayA)) {
             $_SESSION["email"]=$email;
-            $_SESSION["id"]=$array['id'];
+            $_SESSION["id"]=$arrayA['id'];
+            $_SESSION["prenom"]=$arrayA['prenom'];
+            $_SESSION["nom"]=$arrayA['nom'];        
             $_SESSION["role"]='admin';
             header("Location: http://localhost/gef/admin");
-        }else {
+        }else if (is_array($arrayE)) {
+            $_SESSION["email"]=$email;
+            $_SESSION["id"]=$arrayE['id'];
+            $_SESSION["prenom"]=$arrayE['prenom'];
+            $_SESSION["nom"]=$arrayE['nom'];        
+            $_SESSION["role"]='entraineur';
+            header("Location: http://localhost/gef/entraineur");
+        }else if (is_array($arrayJ)) {
+            $_SESSION["email"]=$email;
+            $_SESSION["id"]=$arrayJ['id'];
+            $_SESSION["prenom"]=$arrayJ['prenom'];
+            $_SESSION["nom"]=$arrayJ['nom'];        
+            $_SESSION["role"]='joueur';
+            header("Location: http://localhost/gef/joueur");
+        }else{
             $error="error";
             $error_content="L'email ou le mot de passe est incorrect";
         }
