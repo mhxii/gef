@@ -9,6 +9,7 @@
     getElement(".col.message").addEventListener('click',showMessage);
     getElement(".col.entraineur").addEventListener('click',showEntraineur);
   }
+
   
   function showPlayerDispo() {
     blockAllStatus();
@@ -59,9 +60,6 @@
     setTimeout(function() {
       error.style.display = 'none';
     }, 3000);
-  var sucess=document.querySelector(".sucess");
-    sucess.style.display="block";
-    setTimeout(function() {
-        sucess.style.display = 'none';
-    }, 3000);
+
+
 })();

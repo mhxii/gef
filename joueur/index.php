@@ -225,24 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 ?>
                 <small>Entraînement</small>
               </div>
-              <div class="col playerDispo">
-                <i class="fas fa-user fa-2x"></i>
-                <?php
-                  $sql = "SELECT * FROM joueur where sante='forme'";
-                  $result = $bd->query($sql);
-                  echo "<p class='mt-2 mb-0'>" . $result->num_rows . "</p>";
-                ?>
-                <small>Joueurs Disponible</small>
-              </div>
-              <div class="col playerBlesse">
-                <i class="fas fa-user-injured fa-2x"></i>
-                <?php
-                  $sql = "SELECT * FROM joueur where sante='blesse'";
-                  $result = $bd->query($sql);
-                  echo "<p class='mt-2 mb-0'>" . $result->num_rows . "</p>";
-                ?>
-                <small>Joueurs Blesse</small>
-              </div>
+
               
             </div>
             <div class="row status-row message">
@@ -294,18 +277,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if($row1["status"]=="a venir"){
                         echo   "<div class='status'><i class='fas fa-long-arrow-alt-right'></i></div>";
                         echo   "
-                              <form method='POST' class='d-inline'>
-                                <input required type='hidden' name='id' value='" . $row1["id"] . "'>
-                                <button type='submit' name='demarreM' class='btn btn-success btn-sm mr-2'>Demarre le match</button>
-                              </form>
                             
                               </li>";
                         }else if($row1["status"]=="en cour"){
                         echo   "<div class='status'><i class='fas fa-spinner fa-spin text-danger'></i></div>";
                         echo   "
-                                  <input required type='hidden' name='id' value='" . $row1["id"] . "'>
                                 
-                                  <button type='submit' name='editM' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#majMatch" . $row1["id"] . "'>Mettre le resultat</button>
                               </li>";
                         }else if($row1["status"]=="termine"){
                         echo   "<div class='status'><i class='fas fa-check-circle text-success'></i></div>";
@@ -404,21 +381,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if($row1["status"]=="a venir"){
                           echo   "<div class='status'><i class='fas fa-long-arrow-alt-right'></i></div>";
                           echo   "
-                                <form method='POST' class='d-inline'>
-                                  <input required type='hidden' name='id' value='" . $row1["id"] . "'>
-                                  <button type='submit' name='demarreE' class='btn btn-success btn-sm mr-2'>Demarre l'entrainement</button>
-                                </form>
-                                <form method='POST' class='d-inline'>
-                                <input required type='hidden' name='id' value='" . $row1["id"] . "'>
-                                <button type='submit' name='deleteE' class='btn btn-danger btn-sm mr-2'>Supprimer</button>
-                              </form>
+           
                                 </li>";
                           }else if($row1["status"]=="en cour"){
                           echo   "<div class='status'><i class='fas fa-spinner fa-spin text-danger'></i></div>";
                           echo   "
-                          <form method='POST' class='d-inline'>
-                                    <input required type='hidden' name='id' value='" . $row1["id"] . "'>
-                                    <button type='submit' name='majE' class='btn btn-primary btn-sm' >Terminer entrainement</button></form>
                                 </li>";
                           }else if($row1["status"]=="termine"){
                           echo   "<div class='status'><i class='fas fa-check-circle text-success'></i></div></li>";
@@ -431,9 +398,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   }
                 ?>
               </ul>
-              <div class="text-left">
-                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ajouterEntrainement">Ajouter un entrainement</button>
-              </div>
+
             </div>
             </div>
             <div class="text-right">

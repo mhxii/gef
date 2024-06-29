@@ -4,8 +4,6 @@
   window.addEventListener("load",init);
   function init() {
     showMessage();
-    getElement(".col.playerDispo").addEventListener('click',showPlayerDispo);
-    getElement(".col.playerBlesse").addEventListener('click',showPlayerBlesse);
     getElement(".col.matchs").addEventListener('click',showMatchs);
     getElement(".col.message").addEventListener('click',showMessage);
     getElement(".col.entrainement").addEventListener('click',showEntrainement);

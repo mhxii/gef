@@ -11,8 +11,10 @@ if(empty($_SESSION['email'])){
     
     }
 include_once('../config.php');
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  if (isset($_POST['delete'])) {
+// Joueur
+  if (isset($_POST['deleteJ'])) {
       $id = $_POST['id'];
       $sql = "DELETE FROM joueur WHERE id = $id";
       if ($bd->query($sql) === TRUE) {
@@ -22,13 +24,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error='error';
         $error_content= "Erreur de suppression";
       }
-  } elseif (isset($_POST['edit'])) {
-      // Traiter la modification ici (afficher le formulaire de modification, etc.)
-      $id = $_POST['id'];
-      // Exemple simple pour démonstration :
-      echo "Modifier le joueur avec ID: $id";
   }
 
+  // Entraineur
+  if (isset($_POST['deleteE'])) {
+    $id = $_POST['id'];
+    $sql = "DELETE FROM entrain WHERE id = $id";
+    if ($bd->query($sql) === TRUE) {
+        $sucess='sucess';
+        $sucess_content="L'entraineur est supprimee";
+    } else {
+      $error='error';
+      $error_content= "Erreur de suppression";
+    }
+  }
+
+  // Match
+  if (isset($_POST['deleteM'])) {
+    $id = $_POST['id'];
+    $sql = "DELETE FROM matchs WHERE id = $id";
+    if ($bd->query($sql) === TRUE) {
+        $sucess='sucess';
+        $sucess_content="Le match est supprimee";
+    } else {
+      $error='error';
+      $error_content= "Erreur de suppression";
+    }
+  }
   if(isset($_POST['addJ'])){ 
     $sql = "INSERT INTO joueur (email, password, prenom, nom, tel, role, poste, numero, ddn) VALUES (?, ?, ?, ?, ?, 'Joueur', ?, ?, ?)";
     $stmt = $bd->prepare($sql);
@@ -91,6 +113,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error_content = "Erreur de préparation de la requête: " . $bd->error;
     }
   }
+
+  if(isset($_POST['addM'])){ 
+    $sql = "INSERT INTO matchs (adversaire, type, jour, tournoi, journee) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $bd->prepare($sql);
+
+    if ($stmt) {
+        // Lier les paramètres
+        $stmt->bind_param(
+            "sssss",
+            $_POST['adversaire'],
+            $_POST['type'],
+            $_POST['jour'],
+            $_POST['tournoi'],
+            $_POST['journee'],
+        );
+
+        // Exécuter la requête
+        if ($stmt->execute()) {
+            $sucess = 'sucess';
+            $sucess_content = 'Le match est ajouté';
+        } else {
+            $error = 'error';
+            $error_content = "Erreur d'ajout: " . $stmt->error;
+        }
+    } else {
+        $error = 'error';
+        $error_content = "Erreur de préparation de la requête: " . $bd->error;
+    }
+  }
 }
 ?>
 
@@ -118,17 +169,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <a class="nav-link" href="#">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Effectif</a>
+          <a class="nav-link" href="#"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Calendrier</a>
+          <a class="nav-link" href="#"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">News</a>
+          <a class="nav-link" href="#"></a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
+        <input required class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
       </form>
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -141,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <a class="dropdown-item" href="#">Profil</a>
           <div class="dropdown-divider"></div>
           <form action="" method="post">
-            <input class="dropdown-item logout" type="submit" name="logout" value="Déconnexion">
+            <input required class="dropdown-item logout" type="submit" name="logout" value="Déconnexion">
 
           </form>
         </div>
@@ -160,28 +211,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row status-row">
               <div class="col message">
                 <i class="fas fa-envelope fa-2x"></i>
-                <p class="mt-2 mb-0">8</p>
+                <p class="mt-2 mb-0">4</p>
                 <small>Messages</small>
               </div>
               <div class="col matchs">
                 <i class="fa-2x"><img src="../images/stadium.png" alt=""></i>
-                <p class="mt-2 mb-0">29</p>
+                <?php
+                  $sql = "SELECT * FROM matchs";
+                  $result = $bd->query($sql);
+                  echo "<p class='mt-2 mb-0'>" . $result->num_rows . "</p>";
+                ?>
                 <small>Matchs</small>
               </div>
               <div class="col playerDispo">
                 <i class="fas fa-user fa-2x"></i>
-                <p class="mt-2 mb-0">29</p>
+                <?php
+                  $sql = "SELECT * FROM joueur";
+                  $result = $bd->query($sql);
+                  echo "<p class='mt-2 mb-0'>" . $result->num_rows . "</p>";
+                ?>
                 <small>Joueurs</small>
               </div>
               <div class="col entraineur">
                 <i class="fas fa-dumbbell fa-2x"></i>
-                <p class="mt-2 mb-0">3</p>
+                <?php
+                  $sql = "SELECT * FROM entrain";
+                  $result = $bd->query($sql);
+                  echo "<p class='mt-2 mb-0'>" . $result->num_rows . "</p>";
+                ?>
                 <small>Entraîneurs</small>
-              </div>
-              <div class="col planning">
-                <i class="fas fa-calendar fa-2x" data-toggle="modal" data-target="#trophiesModal"></i>
-                <p class="mt-2 mb-0">29</p>
-                <small>Planning</small>
               </div>
             </div>
             <div class="row status-row message">
@@ -213,39 +271,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               </ul>
             </div>
             <div class="row status-row matchList">
-              <ul class="match-list" style="display: block;">
-                <li class="match">
-                  <div class="avatar"><i class="fa-2x"><img src="../images/stade.png" alt="" sizes="" srcset=""></i></div>
-                  <div class="match-content"><h5>Equipe VS Adversaire</h5><p>Ligue / Journee 12</p></div>
-                  <div class="score">0-0</div>
-                  <div class="time">27/06/2024 15:30</div>
-                  <div class="status"><i class="fas fa-long-arrow-alt-right"></i></div>
-                  <button class="btn btn-primary btn-sm">Modifier</button>
-                </li>
-                <li class="match">
-                  <div class="avatar"><i class="fa-2x"><img src="../images/stade.png" alt="" srcset=""></i></div>
-                  <div class="match-content"><h5>Adversaire VS Equipe</h5><p>LDC / Journee 1</p></div>
-                  <div class="score">2-0</div>
-                  <div class="time">17/06/2024 15:30</div>
-                  <div class="status"><i class="fas fa-spinner fa-spin text-danger"></i></div>
-                  <button class="btn btn-primary btn-sm">Modifier</button>
-                </li>
-                <li class="match">
-                  <div class="avatar"><i class="fa-2x"><img src="../images/stade.png" alt="" srcset=""></i></div>
-                  <div class="match-content"><h5>Adversaire VS Equipe</h5><p>Ligue / Journee 11</p></div>
-                  <div class="score">4-0</div>
-                  <div class="time">11/06/2024 19:30</div>
-                  <div class="status"><i class="fas fa-check-circle text-success"></i></div>
-                  <button class="btn btn-primary btn-sm">Modifier</button>
-                </li>
-                <li class="match">
-                  <div class="avatar"><i class="fa-2x"><img src="../images/stade.png" alt="" srcset=""></i></div>
-                  <div class="match-content"><h5>Equipe VS Adversaire</h5><p>Coupe / 1/8 Final</p></div>
-                  <div class="score">0-0</div>
-                  <div class="time">02/06/2024 12:30</div>
-                  <div class="status"><i class="fas fa-check-circle text-success"></i></div>
-                  <button class="btn btn-primary btn-sm">Modifier</button>
-                </li>
+              <ul class="match-list" style="display: block;"  >
+              <?php 
+                  $sql1 = "SELECT * FROM matchs ORDER BY jour DESC";
+                  $result1 = $bd->query($sql1);
+                  if ($result1->num_rows > 0) {
+                    while ($row1 = $result1->fetch_assoc()) {
+                        echo "<li class='match'>
+                                <div class='avatar'><i class='fa-2x'><img src='../images/stade.png'></i></div>";
+                        if($row1["type"]=='domicile'){
+                        echo   "<div class='match-content'><h5>Real Madrid VS " .$row1["adversaire"] ."</h5><p>".$row1["tournoi"]."/Journee ".$row1["journee"]."</p></div>";
+                        echo   "<div class='score'>" . $row1["butE"] . "-" .$row1["butA"] . "</div>";
+                        }
+                        else{
+                        echo   "<div class='match-content'><h5>" .$row1["adversaire"] ." VS Real Madrid</h5><p>".$row1["tournoi"]."/Journee ".$row1["journee"]."</p></div>";
+                        echo   "<div class='score'>" . $row1["butA"] . "-" .$row1["butE"] . "</div>";
+                        }
+                        echo   "<div class='time'>" . $row1["jour"] . "</div>";
+                        if($row1["status"]=="a venir"){
+                        echo   "<div class='status'><i class='fas fa-long-arrow-alt-right'></i></div>";
+                        }else if($row1["status"]=="en cour"){
+                        echo   "<div class='status'><i class='fas fa-spinner fa-spin text-danger'></i></div>";
+                        }else if($row1["status"]=="termine"){
+                        echo   "<div class='status'><i class='fas fa-check-circle text-success'></i></div>";
+                        }
+                        echo   "<form method='POST' class='d-inline'>
+                                  <input required type='hidden' name='id' value='" . $row1["id"] . "'>
+                                  <button type='submit' name='deleteM' class='btn btn-danger btn-sm mr-2'>Supprimer</button>
+                                </form>
+                                  <input required type='hidden' name='id' value='" . $row1["id"] . "'>
+                                
+                                  <button type='submit' name='editM' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modifierMatch" . $row1["id"] . "'>Modifier</button>
+                              </li>";
+                        
+                  }
+                  } else {
+                      echo "Pas de matchs";
+                  }
+                ?>
               </ul>
               <div class="text-left">
                 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ajouterMatch">Ajouter un match</button>
@@ -274,13 +337,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class='col-2'>" . $row["poste"] . "</div>
                                 <div class='col-3'>
                                   <form method='POST' class='d-inline'>
-                                <input type='hidden' name='id' value='" . $row["id"] . "'>
-                                <button type='submit' name='delete' class='btn btn-danger btn-sm mr-2'>Supprimer</button>
+                                <input required type='hidden' name='id' value='" . $row["id"] . "'>
+                                <button type='submit' name='deleteJ' class='btn btn-danger btn-sm mr-2'>Supprimer</button>
                               </form>
-                              <form method='POST' class='d-inline'>
-                                <input type='hidden' name='id' value='" . $row["id"] . "'>
-                                <button type='submit' name='edit' class='btn btn-primary btn-sm'>Modifier</button>
-                              </form>
+                                <input required type='hidden' name='id' value='" . $row["id"] . "'>
+                                <button type='submit' name='editJ' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modifierJoueur" . $row["id"] . "'>Modifier</button>
                                 </div>
 
                               </div>";
@@ -316,19 +377,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                   <div class='col-4'>" . $row["role"] . "</div>
                                   <div class='col-3'>
                                     <form method='POST' class='d-inline'>
-                                  <input type='hidden' name='id' value='" . $row["id"] . "'>
-                                  <button type='submit' name='delete' class='btn btn-danger btn-sm mr-2'>Supprimer</button>
+                                  <input required type='hidden' name='id' value='" . $row["id"] . "'>
+                                  <button type='submit' name='deleteE' class='btn btn-danger btn-sm mr-2'>Supprimer</button>
                                 </form>
-                                <form method='POST' class='d-inline'>
-                                  <input type='hidden' name='id' value='" . $row["id"] . "'>
-                                  <button type='submit' name='edit' class='btn btn-primary btn-sm'>Modifier</button>
-                                </form>
+                                
+                                  <input required type='hidden' name='id' value='" . $row["id"] . "'>
+                                  <button type='submit' name='editE' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modifierEntraineur" . $row["id"] . "'>Modifier</button>
+                                
                                   </div>
 
                                 </div>";
                       }
                     } else {
-                        echo "Pas de joueurs";
+                        echo "Pas d'entraineur";
                     }
                   ?>
                 </div>
@@ -359,15 +420,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="modal-body">
           <form action="" method="POST">
           <div class="form-group">
-            <input type="text" name="prenom" placeholder="Prenom">
-            <input type="text" name="nom" placeholder="Nom"><br>
-            <input type="date" name="ddn" placeholder="Date naissance"><br>
-            <input type="email" name="email" placeholder="Email"><br>
-            <input type="password" name="password" placeholder="Password"><br>
-            <input type="text" name="poste" placeholder="Poste">
-            <input type="number" name="numero" placeholder="Numero"><br>
-            <input type="tel" name="tel" placeholder="Telephone"><br>
-            <input type="submit" class="btn btn-primary" name="addJ" value="Ajouter">
+            <input required type="text" name="prenom" placeholder="Prenom">
+            <input required type="text" name="nom" placeholder="Nom"><br>
+            <input required type="date" name="ddn" placeholder="Date naissance"><br>
+            <input required type="email" name="email" placeholder="Email"><br>
+            <input required type="password" name="password" placeholder="Password"><br>
+            <input required type="text" name="poste" placeholder="Poste">
+            <input required type="number" name="numero" placeholder="Numero"><br>
+            <input required type="tel" name="tel" placeholder="Telephone"><br>
+            <input required type="submit" class="btn btn-primary" name="addJ" value="Ajouter">
           </div>
           </form>
         </div>
@@ -390,14 +451,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="modal-body">
           <form action="" method="POST">
           <div class="form-group">
-            <input type="text" name="prenom" placeholder="Prenom">
-            <input type="text" name="nom" placeholder="Nom"><br>
-            <input type="date" name="ddn" placeholder="Date naissance"><br>
-            <input type="email" name="email" placeholder="Email">
-            <input type="password" name="password" placeholder="Password"><br>
-            <input type="text" name="role" placeholder="Role">
-            <input type="tel" name="tel" placeholder="Telephone"><br>
-            <input type="submit" class="btn btn-primary" name="addE" value="Ajouter">
+            <input required type="text" name="prenom" placeholder="Prenom">
+            <input required type="text" name="nom" placeholder="Nom"><br>
+            <input required type="date" name="ddn" placeholder="Date naissance"><br>
+            <input required type="email" name="email" placeholder="Email">
+            <input required type="password" name="password" placeholder="Password"><br>
+            <input required type="text" name="role" placeholder="Role">
+            <input required type="tel" name="tel" placeholder="Telephone"><br>
+            <input required type="submit" class="btn btn-primary" name="addE" value="Ajouter">
           </div>
           </form>
         </div>
@@ -418,7 +479,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           </button>
         </div>
         <div class="modal-body">
-          <form action="" method="post"></form>
+          <form action="" method="post">
+            <div class="form-group">
+              <input required type="text" name="adversaire" placeholder="Adversaire"><br>
+              <select name="type">
+                <option value="">--Sélectionnez le type--</option>
+                <option value="domicile">Domicile</option>
+                <option value="exterieur">Exterieur</option>
+              </select><br>
+              <input required type="datetime-local" name="jour" placeholder="Date et heure"><br>
+              <input required type="text" name="tournoi" placeholder="Tournoi">
+              <input required type="number" name="journee" placeholder="Journee">
+              <input required type="submit" class="btn btn-primary" name="addM" value="Ajouter">
+            </div>
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -426,6 +500,124 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
     </div>
   </div>
+  <?php
+  $sql = "SELECT * FROM matchs";
+  $result = $bd->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+echo  "<div class='modal fade' id='modifierMatch" . $row["id"] . "' tabindex='-1' role='dialog' aria-labelledby='modifierMatch" . $row["id"] . "' aria-hidden='true'>
+        <div class='modal-dialog' role='document'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h5 class='modal-title' id='modifierMatch'>Modifier ce match</h5>
+              <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                <span aria-hidden='true'>&times;</span>
+              </button>
+            </div>
+            <div class='modal-body'>
+              <form action='' method='post'>
+                <div class='form-group'>
+                  <input required value='" . $row["adversaire"] . "' type='text' name='adversaire' placeholder='Adversaire'><br>
+                  <select name='type'>
+                    <option value=''>--Sélectionnez le type--</option>
+                    <option value='domicile'>Domicile</option>
+                    <option value='exterieur'>Exterieur</option>
+                  </select><br>
+                  <input required value='" . $row["jour"] . "' type='datetime-local' name='jour' placeholder='Date et heure'><br>
+                  <input required value='" . $row["tournoi"] . "' type='text' name='tournoi' placeholder='Tournoi'>
+                  <input required value='" . $row["journee"] . "' type='number' name='journee' placeholder='Journee'>
+                  <input required type='hidden' name='id' value='" . $row["id"] . "'>
+                  <input required type='submit' class='btn btn-primary' name='updateM' value='Modifier'>
+                </div>
+                
+              </form>
+            </div>
+            <div class='modal-footer'>
+              <button type='button' class='btn btn-secondary' data-dismiss='modal'>Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>";
+    }
+  }
+  ?>
+   <?php
+  $sql = "SELECT * FROM joueur";
+  $result = $bd->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+echo  "<div class='modal fade' id='modifierJoueur" . $row["id"] . "' tabindex='-1' role='dialog' aria-labelledby='modifierJoueur" . $row["id"] . "' aria-hidden='true'>
+        <div class='modal-dialog' role='document'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h5 class='modal-title' id='modifierJoueur'>Modifier ce joueur</h5>
+              <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                <span aria-hidden='true'>&times;</span>
+              </button>
+            </div>
+            <div class='modal-body'>
+              <form action='' method='post'>
+                <div class='form-group'>
+                  <input value='" . $row["prenom"] . "' required type='text' name='prenom' placeholder='Prenom'>
+                  <input value='" . $row["nom"] . "' required type='text' name='nom' placeholder='Nom'><br>
+                  <input value='" . $row["ddn"] . "' required type='date' name='ddn' placeholder='Date naissance'><br>
+                  <input value='" . $row["email"] . "' required type='email' name='email' placeholder='Email'>
+                  <input value='" . $row["password"] . "' required readonly type='password' name='password' placeholder='Password'><br>
+                  <input value='" . $row["poste"] . "' required type='text' name='poste' placeholder='Poste'>
+                  <input value='" . $row["numero"] . "' required type='number' name='numero' placeholder='Numero'><br>
+                  <input value='" . $row["tel"] . "' required type='tel' name='tel' placeholder='Telephone'><br>
+                  <input required type='hidden' name='id' value='" . $row["id"] . "'>
+                  <input required type='submit' class='btn btn-primary' name='updateJ' value='Modifier'>
+                </div>
+              </form>
+            </div>
+            <div class='modal-footer'>
+              <button type='button' class='btn btn-secondary' data-dismiss='modal'>Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>";
+    }
+  }
+  ?>
+     <?php
+  $sql = "SELECT * FROM entrain";
+  $result = $bd->query($sql);
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+echo  "<div class='modal fade' id='modifierEntraineur" . $row["id"] . "' tabindex='-1' role='dialog' aria-labelledby='modifierEntraineur" . $row["id"] . "' aria-hidden='true'>
+        <div class='modal-dialog' role='document'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h5 class='modal-title' id='modifierEntraineur'>Modifier cette entraineur</h5>
+              <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                <span aria-hidden='true'>&times;</span>
+              </button>
+            </div>
+            <div class='modal-body'>
+              <form action='' method='post'>
+                <div class='form-group'>
+                  <input value='" . $row["prenom"] . "' required type='text' name='prenom' placeholder='Prenom'>
+                  <input value='" . $row["nom"] . "' required type='text' name='nom' placeholder='Nom'><br>
+                  <input value='" . $row["ddn"] . "' required type='date' name='ddn' placeholder='Date naissance'><br>
+                  <input value='" . $row["email"] . "' required type='email' name='email' placeholder='Email'>
+                  <input value='" . $row["password"] . "' required readonly type='password' name='password' placeholder='Password'><br>
+                  <input value='" . $row["role"] . "' required type='text' name='role' placeholder='Role'>
+                  <input value='" . $row["tel"] . "' required type='tel' name='tel' placeholder='Telephone'><br>
+                  <input required type='hidden' name='id' value='" . $row["id"] . "'>
+                  <input required type='submit' class='btn btn-primary' name='updateE' value='Modifier'>
+                </div>
+              </form>
+            </div>
+            <div class='modal-footer'>
+              <button type='button' class='btn btn-secondary' data-dismiss='modal'>Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>";
+    }
+  }
+  ?>
   <div class="<?=@$error;?>">
     <?=@$error_content;?>
   </div>
@@ -439,5 +631,111 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <script src="players.js"></script>
   <script src="messages.js"></script>
   <script src="trainers.js"></script>
+  <script>
+      var sucess=document.querySelector(".sucess");
+    sucess.style.display="block";
+    setTimeout(function() {
+        sucess.style.display = 'none';
+    }, 3000);
+  </script>
 </body>
 </html>
+
+<?php
+              if(isset($_POST['updateM'])){ 
+                $sql = "UPDATE matchs 
+                  SET adversaire = ?, type = ?, jour = ?, tournoi = ?, journee = ? 
+                  WHERE id = ?";
+                $stmt = $bd->prepare($sql);
+            
+                if ($stmt) {
+                    // Lier les paramètres
+                    $stmt->bind_param(
+                        "ssssss",
+                        $_POST['adversaire'],
+                        $_POST['type'],
+                        $_POST['jour'],
+                        $_POST['tournoi'],
+                        $_POST['journee'],
+                        $_POST['id'],
+                    );
+            
+                    // Exécuter la requête
+                    if ($stmt->execute()) {
+                        $sucess = 'sucess';
+                        $sucess_content = 'Le match a ete modifier';
+                    } else {
+                        $error = 'error';
+                        $error_content = "Erreur de modification: " . $stmt->error;
+                    }
+                } else {
+                    $error = 'error';
+                    $error_content = "Erreur de préparation de la requête: " . $bd->error;
+                }
+              }
+              if(isset($_POST['updateJ'])){ 
+                $sql = "UPDATE joueur 
+                  SET email = ?, prenom = ?, nom = ?, tel = ?, poste = ?, numero = ?, ddn = ?
+                  WHERE id = ?";
+                $stmt = $bd->prepare($sql);
+            
+                if ($stmt) {
+                    // Lier les paramètres
+                    $stmt->bind_param(
+                        "ssssssss",
+                        $_POST['email'],
+                        $_POST['prenom'],
+                        $_POST['nom'],
+                        $_POST['tel'],
+                        $_POST['poste'],
+                        $_POST['numero'],
+                        $_POST['ddn'],
+                        $_POST['id'],
+                    );
+            
+                    // Exécuter la requête
+                    if ($stmt->execute()) {
+                        $sucess = 'sucess';
+                        $sucess_content = 'Le joueur a ete modifier';
+                    } else {
+                        $error = 'error';
+                        $error_content = "Erreur de modification: " . $stmt->error;
+                    }
+                } else {
+                    $error = 'error';
+                    $error_content = "Erreur de préparation de la requête: " . $bd->error;
+                }
+              }
+              if(isset($_POST['updateE'])){ 
+                $sql = "UPDATE entrain 
+                  SET email = ?, prenom = ?, nom = ?, tel = ?, role = ?, ddn = ?
+                  WHERE id = ?";
+                $stmt = $bd->prepare($sql);
+            
+                if ($stmt) {
+                    // Lier les paramètres
+                    $stmt->bind_param(
+                        "sssssss",
+                        $_POST['email'],
+                        $_POST['prenom'],
+                        $_POST['nom'],
+                        $_POST['tel'],
+                        $_POST['role'],
+                        $_POST['ddn'],
+                        $_POST['id'],
+                    );
+            
+                    // Exécuter la requête
+                    if ($stmt->execute()) {
+                        $sucess = 'sucess';
+                        $sucess_content = 'L entraineur a ete modifier';
+                    } else {
+                        $error = 'error';
+                        $error_content = "Erreur de modification: " . $stmt->error;
+                    }
+                } else {
+                    $error = 'error';
+                    $error_content = "Erreur de préparation de la requête: " . $bd->error;
+                }
+              }
+?>
